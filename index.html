@@ -11,6 +11,7 @@
 </head>
 <body class="text-gray-800 antialiased">
 
+<!-- NAV -->
 <nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
@@ -29,67 +30,80 @@
   </div>
 </nav>
 
+<!-- HERO CTA -->
 <section class="relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white"></div>
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10"></div>
+
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
     <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Resolve Your <span class="text-blue-700">Tax Balance</span> Now</h1>
-        <p class="mt-4 text-lg text-gray-700">Work with an experienced team that negotiates with the IRS every day. Start from home—no office visit needed.</p>
-        <div class="mt-6 flex gap-3">
-          <a href="contact.html" class="px-5 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800">Free Consultation</a>
-          <a href="services.html" class="px-5 py-3 rounded-lg border">Explore Services</a>
+      <!-- Left content -->
+      <div class="space-y-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+          Resolve Your <span class="text-blue-700">Tax Balance</span> Now
+        </h1>
+
+        <div class="text-gray-700 space-y-4 text-base">
+          <p>Get started today and resolve your tax problems from the comfort of your own home.</p>
+          <p>
+            The Tax Defense Group is a team of well trained and educated professionals ready to take care of all of your tax needs.
+            We care about our clients and will do whatever it takes to help resolve their tax debt or help them with their tax needs.
+            Our professionals are ready to help with tax preparation, tax audits, resolving tax debt, and more! If you need help resolving
+            your taxes, resolution can begin by taking one small step.
+          </p>
         </div>
-        <div class="mt-6 text-sm text-gray-500">Serving clients in all 50 states.</div>
+
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a href="contact.html" class="inline-block px-5 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800 transition">
+            Free Consultation
+          </a>
+          <a href="services.html" class="inline-block px-5 py-3 rounded-lg border hover:bg-gray-50 transition">
+            Explore Services
+          </a>
+        </div>
+
+        <div class="text-sm text-gray-500">Serving clients in all 50 states.</div>
       </div>
-      <div class="bg-white rounded-2xl shadow p-6">
+
+      <!-- Right card with image -->
+      <div class="bg-white rounded-2xl shadow-lg p-6 overflow-hidden relative">
         <h2 class="text-xl font-semibold mb-3">See What You Qualify For</h2>
-        <form id="leadForm" class="grid grid-cols-1 gap-4">
-          <label class="text-sm font-medium">How much does the IRS claim you owe?
-            <select class="mt-1 w-full border rounded-lg p-2" name="debt_range" required>
-              <option value="" selected disabled>Select</option>
-              <option>Less than $5,000</option>
-              <option>$5,000–$10,000</option>
-              <option>$10,000–$25,000</option>
-              <option>$25,000–$50,000</option>
-              <option>$50,000–$100,000</option>
-              <option>$100,000–$250,000</option>
-              <option>$250,000–$500,000</option>
-              <option>$500,000–$1,000,000</option>
-              <option>$1,000,000+</option>
-              <option>Unsure</option>
-            </select>
-          </label>
-          <label class="text-sm font-medium">Main tax issue
-            <select class="mt-1 w-full border rounded-lg p-2" name="issue" required>
-              <option value="" selected disabled>Select</option>
-              <option>Wage Garnishment</option>
-              <option>Bank Levy</option>
-              <option>Federal Tax Lien</option>
-              <option>Unfiled Returns</option>
-              <option>Audit</option>
-              <option>Payroll/Business Taxes</option>
-              <option>Revenue Officer</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input class="w-full border rounded-lg p-2" name="name" placeholder="Full name*" required/>
-            <input class="w-full border rounded-lg p-2" name="email" placeholder="Email*" type="email" required/>
+
+        <figure class="mb-4">
+          <div class="rounded-lg overflow-hidden shadow-inner transform transition-all will-change-transform hover:scale-[1.02]">
+            <picture>
+              <source srcset="https://www.thetaxdefensegroup.com/wp-content/uploads/2021/02/1140-tax-form-w2-check.imgcache.rev0ae68c734cc8c7e0087722978e42e722-1140x588.jpg 1140w, https://www.thetaxdefensegroup.com/wp-content/uploads/2021/02/1140-tax-form-w2-check.imgcache.rev0ae68c734cc8c7e0087722978e42e722-1024x588.jpg 1024w, https://www.thetaxdefensegroup.com/wp-content/uploads/2021/02/1140-tax-form-w2-check.imgcache.rev0ae68c734cc8c7e0087722978e42e722-768x441.jpg 768w, https://www.thetaxdefensegroup.com/wp-content/uploads/2021/02/1140-tax-form-w2-check.imgcache.rev0ae68c734cc8c7e0087722978e42e722-600x345.jpg 600w"
+                      sizes="(max-width: 1024px) 100vw, 1024px">
+              <img
+                src="https://www.thetaxdefensegroup.com/wp-content/uploads/2021/02/1140-tax-form-w2-check.imgcache.rev0ae68c734cc8c7e0087722978e42e722-1024x588.jpg"
+                alt="Tax forms and check — resolve your tax balance"
+                width="1024" height="588"
+                decoding="async"
+                loading="lazy"
+                class="w-full h-auto block filter-brightness rounded-lg"
+                />
+            </picture>
           </div>
-          <input class="w-full border rounded-lg p-2" name="phone" placeholder="Phone*" required/>
-          <label class="inline-flex items-center gap-2 text-sm">
-            <input type="checkbox" name="sms_ok" class="w-4 h-4 border rounded"> OK to text me about my case
-          </label>
-          <button class="mt-2 px-4 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800">Get Free Case Review</button>
-          <p id="leadThanks" class="hidden text-green-700 text-sm">Thank you — we received your request. We’ll reach out shortly.</p>
-          <p class="text-xs text-gray-500">By submitting, you agree to our <a class="underline" href="terms.html">Terms</a> and <a class="underline" href="privacy.html">Privacy Policy</a>.</p>
+        </figure>
+
+        <!-- Simple lead form -->
+        <form id="heroLeadForm" class="grid grid-cols-1 gap-3" onsubmit="event.preventDefault(); submitHeroForm();">
+          <input name="name" type="text" required placeholder="Full name*" class="w-full border rounded-lg p-2"/>
+          <input name="phone" type="tel" required placeholder="Phone*" class="w-full border rounded-lg p-2"/>
+          <input name="email" type="email" required placeholder="Email*" class="w-full border rounded-lg p-2"/>
+          <div class="flex items-center gap-2 text-sm">
+            <input type="checkbox" id="sms_ok" name="sms_ok" class="w-4 h-4 rounded border"/>
+            <label for="sms_ok" class="text-sm">OK to text me about my case</label>
+          </div>
+          <button type="submit" class="mt-1 px-4 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800">Get Free Case Review</button>
+          <p id="heroThanks" class="hidden text-green-700 text-sm">Thank you — we received your request.</p>
         </form>
       </div>
     </div>
   </div>
 </section>
 
+<!-- METRICS -->
 <section class="py-12 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -113,50 +127,40 @@
   </div>
 </section>
 
+<!-- CORE SERVICES -->
 <section class="py-12 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-2xl font-bold mb-6">Core Services</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-<a href="services.html#tax-relief" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Tax Relief</h3>
-  <p class="text-sm text-gray-600">Payment plans, penalty relief, and other options to reduce or restructure what you owe.</p>
-</a>
-
-
-<a href="services.html#tax-resolution" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Tax Resolution</h3>
-  <p class="text-sm text-gray-600">Audit representation, liens and levies, wage garnishments, and enforcement defense.</p>
-</a>
-
-
-<a href="services.html#offer-in-compromise" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Offer in Compromise</h3>
-  <p class="text-sm text-gray-600">Qualify to settle your balance for less based on financial hardship.</p>
-</a>
-
-
-<a href="services.html#installment-agreements" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Installment Agreements</h3>
-  <p class="text-sm text-gray-600">Affordable monthly plans that fit your budget and stop collection pressure.</p>
-</a>
-
-
-<a href="services.html#currently-not-collectible" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Currently Not Collectible (CNC)</h3>
-  <p class="text-sm text-gray-600">Pause collections when you can’t afford to pay right now.</p>
-</a>
-
-
-<a href="services.html#tax-preparation" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-  <h3 class="font-semibold mb-2">Tax Preparation</h3>
-  <p class="text-sm text-gray-600">Individual & business returns, amended filings, and catch-up year(s).</p>
-</a>
-
+      <a href="services.html#tax-relief" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Tax Relief</h3>
+        <p class="text-sm text-gray-600">Payment plans, penalty relief, and other options to reduce or restructure what you owe.</p>
+      </a>
+      <a href="services.html#tax-resolution" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Tax Resolution</h3>
+        <p class="text-sm text-gray-600">Audit representation, liens and levies, wage garnishments, and enforcement defense.</p>
+      </a>
+      <a href="services.html#offer-in-compromise" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Offer in Compromise</h3>
+        <p class="text-sm text-gray-600">Qualify to settle your balance for less based on financial hardship.</p>
+      </a>
+      <a href="services.html#installment-agreements" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Installment Agreements</h3>
+        <p class="text-sm text-gray-600">Affordable monthly plans that fit your budget and stop collection pressure.</p>
+      </a>
+      <a href="services.html#currently-not-collectible" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Currently Not Collectible (CNC)</h3>
+        <p class="text-sm text-gray-600">Pause collections when you can’t afford to pay right now.</p>
+      </a>
+      <a href="services.html#tax-preparation" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
+        <h3 class="font-semibold mb-2">Tax Preparation</h3>
+        <p class="text-sm text-gray-600">Individual & business returns, amended filings, and catch-up year(s).</p>
+      </a>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS / WHY -->
 <section class="py-12">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
     <div class="bg-white rounded-2xl p-6 shadow">
@@ -178,6 +182,7 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="mt-16 border-t">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid md:grid-cols-3 gap-8">
     <div>
@@ -204,6 +209,30 @@
   </div>
   <div class="text-center text-xs text-gray-500 pb-6">© 2025 Tax Defense Group USA. All rights reserved.</div>
 </footer>
+
+<!-- HERO extra styles -->
+<style>
+  .filter-brightness {
+    filter: saturate(0.95) contrast(1.02) brightness(0.98);
+    transition: transform .35s ease, filter .35s ease;
+  }
+  @media (min-width: 768px) {
+    .filter-brightness:hover {
+      transform: translateY(-4px) scale(1.01);
+      filter: saturate(1) contrast(1.04) brightness(1);
+    }
+  }
+</style>
+
+<!-- HERO form logic -->
+<script>
+  function submitHeroForm() {
+    const thanks = document.getElementById('heroThanks');
+    thanks.classList.remove('hidden');
+    document.getElementById('heroLeadForm').reset();
+    console.log('Hero lead simulated submit');
+  }
+</script>
 
 <script src="main.js"></script>
 </body>
