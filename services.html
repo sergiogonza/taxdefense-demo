@@ -19,14 +19,53 @@
         <img src="assets/logo2.png" alt="Tax Defense Group USA" class="h-8 w-8"/>
         <span class="font-bold text-xl">Tax Defense Group USA</span>
       </a>
-      <div class="hidden md:flex items-center gap-6">
-        <a href="services.html" class="hover:text-blue-600">Services</a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-6 relative">
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 hover:text-blue-600 focus:outline-none">
+            Services <i class="ti-angle-down"></i>
+          </button>
+          <div class="absolute left-0 mt-2 w-48 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity">
+            <a href="#tax-relief" class="block px-4 py-2 hover:bg-blue-50">Tax Relief</a>
+            <a href="#tax-resolution" class="block px-4 py-2 hover:bg-blue-50">Tax Resolution</a>
+            <a href="#tax-preparation" class="block px-4 py-2 hover:bg-blue-50">Tax Preparation</a>
+            <a href="#tax-negotiation" class="block px-4 py-2 hover:bg-blue-50">Tax Negotiation</a>
+            <a href="#sba-loan-default" class="block px-4 py-2 hover:bg-blue-50">SBA Loan Default</a>
+            <a href="#bookkeeping-services" class="block px-4 py-2 hover:bg-blue-50">Bookkeeping Services</a>
+          </div>
+        </div>
+
         <a href="faq.html" class="hover:text-blue-600">FAQ</a>
         <a href="reviews.html" class="hover:text-blue-600">Reviews</a>
         <a href="careers.html" class="hover:text-blue-600">Careers</a>
         <a href="contact.html" class="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">Free Consultation</a>
       </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="focus:outline-none">
+          <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+          <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+          <span class="block w-6 h-0.5 bg-gray-800"></span>
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+    <a href="#tax-relief" class="block px-4 py-2 border-b">Tax Relief</a>
+    <a href="#tax-resolution" class="block px-4 py-2 border-b">Tax Resolution</a>
+    <a href="#tax-preparation" class="block px-4 py-2 border-b">Tax Preparation</a>
+    <a href="#tax-negotiation" class="block px-4 py-2 border-b">Tax Negotiation</a>
+    <a href="#sba-loan-default" class="block px-4 py-2 border-b">SBA Loan Default</a>
+    <a href="#bookkeeping-services" class="block px-4 py-2 border-b">Bookkeeping Services</a>
+    <a href="faq.html" class="block px-4 py-2 border-b">FAQ</a>
+    <a href="reviews.html" class="block px-4 py-2 border-b">Reviews</a>
+    <a href="careers.html" class="block px-4 py-2 border-b">Careers</a>
+    <a href="contact.html" class="block px-4 py-2 text-blue-600 font-semibold">Free Consultation</a>
   </div>
 </nav>
 
@@ -48,21 +87,11 @@
     
     <h3 class="text-2xl font-semibold mt-6">Tax Relief Options</h3>
     <ol class="list-decimal list-inside space-y-2">
-      <li>
-        <strong>Installment Agreement:</strong> If you cannot pay off your balance right away, the IRS can create a payment plan or installment agreement.
-      </li>
-      <li>
-        <strong>Offer in Compromise:</strong> For significant financial hardship, the IRS may settle your taxes for less than owed.
-      </li>
-      <li>
-        <strong>Currently Not Collectible:</strong> If paying now causes hardship, your account may be placed in CNC status to pause collections.
-      </li>
-      <li>
-        <strong>Penalty Abatement:</strong> Removal or reduction of penalties due to late payments.
-      </li>
-      <li>
-        <strong>Request for an Extension:</strong> Up to 120 days to pay your balance in full with minimal penalties.
-      </li>
+      <li><strong>Installment Agreement:</strong> If you cannot pay off your balance right away, the IRS can create a payment plan or installment agreement.</li>
+      <li><strong>Offer in Compromise:</strong> For significant financial hardship, the IRS may settle your taxes for less than owed.</li>
+      <li><strong>Currently Not Collectible:</strong> If paying now causes hardship, your account may be placed in CNC status to pause collections.</li>
+      <li><strong>Penalty Abatement:</strong> Removal or reduction of penalties due to late payments.</li>
+      <li><strong>Request for an Extension:</strong> Up to 120 days to pay your balance in full with minimal penalties.</li>
     </ol>
 
     <h3 class="text-2xl font-semibold mt-6">Special Situations</h3>
@@ -79,6 +108,21 @@
     <section id="tax-preparation">
       <h2 class="text-2xl font-semibold">Tax Preparation</h2>
       <p>Individual and business returns, amended filings, and catch-up years to get you current and compliant.</p>
+    </section>
+
+    <section id="tax-negotiation">
+      <h2 class="text-2xl font-semibold">Tax Negotiation</h2>
+      <p>Negotiation services with the IRS to settle balances, reduce penalties, or establish manageable payment plans.</p>
+    </section>
+
+    <section id="sba-loan-default">
+      <h2 class="text-2xl font-semibold">SBA Loan Default</h2>
+      <p>We provide guidance and representation for clients dealing with SBA loan default issues to minimize financial and legal impact.</p>
+    </section>
+
+    <section id="bookkeeping-services">
+      <h2 class="text-2xl font-semibold">Bookkeeping Services</h2>
+      <p>Accurate bookkeeping solutions for businesses to ensure compliance, smooth audits, and better financial planning.</p>
     </section>
   </div>
 </section>
@@ -111,6 +155,14 @@
   <div class="text-center text-xs text-gray-500 pb-6">© 2025 Tax Defense Group USA. All rights reserved.</div>
 </footer>
 
-<script src="main.js"></script>
+<!-- Mobile Menu Toggle Script -->
+<script>
+  const mobileButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+
 </body>
 </html>
