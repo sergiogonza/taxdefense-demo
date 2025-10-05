@@ -49,137 +49,127 @@
     </div>
   </nav>
 
-  <!-- HERO CTA -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10"></div>
+ 
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
-      <div class="grid md:grid-cols-2 gap-10 items-start">
-        <!-- Left content -->
-        <div class="space-y-6">
-          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-            Stop IRS Collections <span class="text-blue-700">Settle Your Tax Debt</span> Today
-          </h1>
 
-          <div class="text-gray-700 space-y-4 text-base">
-            <p>Get started today and resolve your tax problems from the comfort of your own home.</p>
 
-            <p>
-              By providing your phone number, you agree to receive SMS messages from 
-              Tax Defense Group USA for appointment scheduling, reminders, and important updates. 
-              Message frequency varies. Message and data rates may apply. 
-              Reply <strong>STOP</strong> to opt out. For help, text <strong>HELP</strong> 
-              or visit 
-              <a href="https://taxdefensegroupousa.com/contact" target="_blank" rel="noopener noreferrer">
-                taxdefensegroupousa.com/contact
-              </a>. 
-              See our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> 
-              for more information.
-            </p>
-          </div>
 
-          <div class="mt-2 flex flex-wrap gap-3">
-            <a href="contact.html" class="inline-block px-5 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800 transition">
-              Free Tax Analysis
-            </a>
-            <a href="services.html" class="inline-block px-5 py-3 rounded-lg border hover:bg-gray-50 transition">
-              Explore Services
-            </a>
-          </div>
+  <!-- HERO CTA (REEMPLAZAR ESTE BLOQUE COMPLETO) -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10"></div>
 
-          <div class="text-sm text-gray-500">Serving clients in all 50 states.</div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <!-- Left content -->
+      <div class="space-y-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+          Stop IRS Collections <span class="text-blue-700">Settle Your Tax Debt</span> Today
+        </h1>
+
+        <div class="text-gray-700 space-y-4 text-base">
+          <p>Get started today and resolve your tax problems from the comfort of your own home.</p>
+
+          <p>
+            By providing your phone number, you agree to receive SMS messages from
+            Tax Defense Group USA for appointment scheduling, reminders, and important updates.
+            Message frequency varies. Message and data rates may apply.
+            Reply <strong>STOP</strong> to opt out. For help, text <strong>HELP</strong>
+            or visit
+            <a href="https://taxdefensegroupusa.com/contact" target="_blank" rel="noopener noreferrer">
+              taxdefensegroupusa.com/contact
+            </a>.
+            See our <a href="https://taxdefensegroupusa.com/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            and <a href="https://taxdefensegroupusa.com/terms.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>.
+          </p>
         </div>
 
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a href="contact.html" class="inline-block px-5 py-3 rounded-lg bg-blue-700 text-white hover:bg-blue-800 transition">
+            Free Tax Analysis
+          </a>
+          <a href="services.html" class="inline-block px-5 py-3 rounded-lg border hover:bg-gray-50 transition">
+            Explore Services
+          </a>
+        </div>
 
+        <div class="text-sm text-gray-500">Serving clients in all 50 states.</div>
+      </div>
 
-        
+      <!-- Right card with embedded form: fixed structure -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="p-4 md:p-6">
+          <div class="mb-3">
+            <h2 class="text-lg font-semibold">Request a Free Consultation</h2>
+            <p class="text-sm text-gray-600">Complete the form and our team will contact you.</p>
+          </div>
+        </div>
 
+        <!-- iframe wrapper: placeholder -> iframe inserted lazy to avoid external script breaking layout -->
+        <div id="form-iframe-wrap" class="w-full" style="min-height:420px;max-height:1000px;overflow:hidden;">
+          <div id="form-iframe-placeholder" class="w-full h-full flex items-center justify-center p-6">
+            <div class="text-center text-sm text-gray-500">Cargando formulario…</div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /.grid -->
+  </div> <!-- /.container -->
 
+  <!-- Lazy-load iframe script (keeps host page safe from embed script injection) -->
+  <script>
+    (function () {
+      const wrap = document.getElementById('form-iframe-wrap');
+      if (!wrap) return;
 
+      function insertIframe() {
+        if (document.getElementById('inline-yFTBzCkkuC6LJv0fjeFm')) return;
 
+        const iframe = document.createElement('iframe');
+        iframe.id = 'inline-yFTBzCkkuC6LJv0fjeFm';
+        iframe.src = 'https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm';
+        iframe.title = 'A2P Official Form';
+        iframe.loading = 'lazy';
+        iframe.frameBorder = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '640px';
+        iframe.style.border = 'none';
+        iframe.style.display = 'block';
+        iframe.style.minHeight = '420px';
 
+        wrap.innerHTML = '';
+        wrap.appendChild(iframe);
 
-
-
-      <!-- Right card with embedded form (iframe) - LAZY-LOAD (opción recomendada) -->
-<div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-  <div class="p-4 md:p-6">
-    <div class="mb-3">
-      <h2 class="text-lg font-semibold">Request a Free Consultation</h2>
-      <p class="text-sm text-gray-600">Complete the form and our team will contact you.</p>
-    </div>
-  </div>
-
-  <!-- Contenedor del iframe: fuerza tamaño mínimo y permite scroll interno -->
-  <div id="form-iframe-wrap" class="w-full" style="min-height:420px;max-height:1000px;overflow:hidden;">
-    <!-- marcador de posición mientras carga -->
-    <div id="form-iframe-placeholder" class="w-full h-full flex items-center justify-center p-6">
-      <div class="text-center text-sm text-gray-500">Cargando formulario…</div>
-    </div>
-  </div>
-</div>
-
-<!-- NO incluyas form_embed.js globalmente aquí si usas lazy-load con iframe -->
-<!-- Script para crear el iframe después de que la página cargue (evita que scripts externos rompan layout) -->
-<script>
-  (function () {
-    const wrap = document.getElementById('form-iframe-wrap');
-    if (!wrap) return;
-
-    // Solo crear iframe cuando el navegador esté en idle o tras load para evitar reflows durante paint
-    function insertIframe() {
-      // Si ya fue creado, salir
-      if (document.getElementById('inline-yFTBzCkkuC6LJv0fjeFm')) return;
-
-      const iframe = document.createElement('iframe');
-      iframe.id = 'inline-yFTBzCkkuC6LJv0fjeFm';
-      iframe.src = 'https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm';
-      iframe.title = 'A2P Official Form';
-      iframe.loading = 'lazy';
-      iframe.frameBorder = '0';
-      // sandbox opcional: restringe lo que el iframe puede hacer (quita allow-same-origin si no quieres que el contenido acceda al mismo origen)
-      // iframe.sandbox = 'allow-forms allow-scripts allow-popups';
-      // Estilos: ancho 100% y altura inicial responsiva; el script más abajo ajusta la altura
-      iframe.style.width = '100%';
-      iframe.style.height = '640px';
-      iframe.style.border = 'none';
-      iframe.style.display = 'block';
-      iframe.style.minHeight = '420px';
-
-      // remplaza el placeholder por el iframe
-      wrap.innerHTML = '';
-      wrap.appendChild(iframe);
-
-      // Ajuste de altura responsivo (repite lógica anterior pero sin postMessage handling complejo)
-      function adjust() {
-        const vw = window.innerWidth || document.documentElement.clientWidth;
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        if (vw < 640) {
-          iframe.style.height = Math.max(420, Math.round(vh * 0.58)) + 'px';
-        } else if (vw < 1024) {
-          iframe.style.height = Math.max(560, Math.round(vh * 0.68)) + 'px';
-        } else {
-          const calc = Math.round(vh * 0.78);
-          iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
+        function adjustHeight() {
+          const vw = window.innerWidth || document.documentElement.clientWidth;
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          if (vw < 640) {
+            iframe.style.height = Math.max(420, Math.round(vh * 0.58)) + 'px';
+          } else if (vw < 1024) {
+            iframe.style.height = Math.max(560, Math.round(vh * 0.68)) + 'px';
+          } else {
+            const calc = Math.round(vh * 0.78);
+            iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
+          }
         }
+
+        window.addEventListener('resize', adjustHeight, { passive: true });
+        window.addEventListener('orientationchange', adjustHeight, { passive: true });
+        setTimeout(adjustHeight, 600);
       }
 
-      window.addEventListener('resize', adjust, { passive: true });
-      window.addEventListener('orientationchange', adjust, { passive: true });
-      setTimeout(adjust, 600);
-    }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(insertIframe, { timeout: 1000 });
+      } else {
+        window.addEventListener('load', () => setTimeout(insertIframe, 300));
+      }
+    })();
+  </script>
+</section>
+<!-- /FIN HERO CTA REEMPLAZADO -->
 
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(insertIframe, {timeout: 1000});
-    } else {
-      window.addEventListener('load', () => setTimeout(insertIframe, 300));
-    }
-  })();
-</script>
+
+
+
   
-
-
-
 
 
         
