@@ -90,45 +90,125 @@
           <div class="text-sm text-gray-500">Serving clients in all 50 states.</div>
         </div>
 
-        <!-- Right card with embedded form (iframe) -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div class="p-4 md:p-6">
-            <!-- Optional header for the form area -->
-            <div class="mb-3">
-              <h2 class="text-lg font-semibold">Request a Free Consultation</h2>
-              <p class="text-sm text-gray-600">Complete the form and our team will contact you.</p>
-            </div>
-          </div>
 
-          <div class="w-full h-[720px]">
-            <!-- Keep iframe responsive and accessible -->
-            <iframe
-              src="https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm"
-              style="width:100%;height:100%;border:none;border-radius:0;"
-              id="inline-yFTBzCkkuC6LJv0fjeFm" 
-              data-layout='{"id":"INLINE"}'
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="neverDeactivate"
-              data-deactivation-value=""
-              data-form-name="A2P Official"
-              data-height="722"
-              data-layout-iframe-id="inline-yFTBzCkkuC6LJv0fjeFm"
-              data-form-id="yFTBzCkkuC6LJv0fjeFm"
-              title="A2P Official Form"
-              loading="lazy"
-              >
-            </iframe>
-          </div>
-        </div>
-      </div>
+
+        
+
+
+
+<!-- Right card with embedded form (iframe) - responsive & adaptive -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+  <div class="p-4 md:p-6">
+    <!-- Optional header for the form area -->
+    <div class="mb-3">
+      <h2 class="text-lg font-semibold">Request a Free Consultation</h2>
+      <p class="text-sm text-gray-600">Complete the form and our team will contact you.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Include form embed script (kept near iframe) -->
-  <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+  <!-- iframe container: responsive heights (sm: shorter, md+: taller) and allow internal scrolling -->
+  <div class="w-full">
+    <iframe
+      id="inline-yFTBzCkkuC6LJv0fjeFm"
+      src="https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm"
+      title="A2P Official Form"
+      loading="lazy"
+      frameborder="0"
+      allow="clipboard-write; autoplay; encrypted-media"
+      style="width:100%;height:640px;border:none;display:block;min-height:420px;"
+      data-layout='{"id":"INLINE"}'
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="A2P Official"
+      data-height="722"
+      data-layout-iframe-id="inline-yFTBzCkkuC6LJv0fjeFm"
+      data-form-id="yFTBzCkkuC6LJv0fjeFm"
+    ></iframe>
+  </div>
+</div>
+
+<!-- Include form embed script (kept near iframe) -->
+<script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+
+<!-- Helper JS: adapta la altura del iframe según pantalla y mensajes desde el embed (si vienen via postMessage) -->
+<script>
+  (function () {
+    const iframe = document.getElementById('inline-yFTBzCkkuC6LJv0fjeFm');
+
+    if (!iframe) return;
+
+    // Ajuste inicial y en resize: móviles usan un % del viewport (para que no ocupe toda la pantalla),
+    // en desktop usar un valor mayor limitado a un tope.
+    function adjustIframeHeight() {
+      const vw = window.innerWidth || document.documentElement.clientWidth;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      if (vw < 640) {
+        // móviles: 58% del alto de la ventana, con mínimo 420px
+        iframe.style.height = Math.max(420, Math.round(vh * 0.58)) + 'px';
+      } else if (vw < 1024) {
+        // tablet: 68% de la ventana o 560px mínimo
+        iframe.style.height = Math.max(560, Math.round(vh * 0.68)) + 'px';
+      } else {
+        // desktop: máximo entre 720px y 78% del viewport, pero no más de 1000px
+        const calc = Math.round(vh * 0.78);
+        iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
+      }
+    }
+
+    // Try to read recommended height sent by the embedded widget (if it posts messages)
+    // Many embed widgets use postMessage({height: ...}) — we handle that generically.
+    function handleMessage(event) {
+      try {
+        // Optionally restrict origin: if you know the embed origin, check event.origin here.
+        const data = event.data;
+        if (!data) return;
+
+        // If the embed sends an object with a numeric height, use it.
+        if (typeof data === 'object' && data !== null) {
+          // common keys: height, iframeHeight, size
+          const h = data.height || data.iframeHeight || data.size || data.h;
+          if (h && !isNaN(Number(h))) {
+            iframe.style.height = (Number(h)) + 'px';
+            return;
+          }
+          // some embeds send strings like "setHeight:800"
+          if (typeof data === 'string') {
+            const m = data.match(/(\d{3,4})/);
+            if (m) {
+              iframe.style.height = m[1] + 'px';
+              return;
+            }
+          }
+        }
+      } catch (e) {
+        // fail silently
+      }
+    }
+
+    // Initial call and listeners
+    adjustIframeHeight();
+    window.addEventListener('resize', adjustIframeHeight, { passive: true });
+    window.addEventListener('orientationchange', adjustIframeHeight, { passive: true });
+    window.addEventListener('message', handleMessage, false);
+
+    // Small timeout in case embed adjusts itself a bit after loading
+    setTimeout(adjustIframeHeight, 800);
+    // Also after the embed script loads, try again
+    window.addEventListener('load', () => setTimeout(adjustIframeHeight, 500));
+  })();
+</script>
+
+
+
+
+
+
+        
 
   <!-- SERVICES -->
   <section class="py-12 bg-white">
