@@ -127,62 +127,74 @@
 
   <!-- Lazy-load iframe script (keeps host page safe from embed script injection) -->
   <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function () {
   // --- Config ---
   const IFRAME_ID = 'inline-yFTBzCkkuC6LJv0fjeFm';
   const IFRAME_SRC = 'https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm';
 
-  // Elements
+  // Elementos del DOM
   const openBtn = document.getElementById('open-consultation');
   const modal = document.getElementById('consultation-modal');
   const overlay = document.getElementById('consultation-overlay');
   const closeBtn = document.getElementById('close-consultation');
   const closeBtnBottom = document.getElementById('close-consultation-bottom');
   const modalWrap = document.getElementById('modal-form-wrap');
-  const modalPlaceholder = document.getElementById('modal-form-placeholder');
+  const heroWrap = document.getElementById('form-iframe-wrap');
+  const heroPlaceholder = document.getElementById('form-iframe-placeholder');
 
-  if (!openBtn || !modal || !modalWrap) return;
+  // Validaciones mínimas: si falta heroWrap aún así el modal podrá abrir, pero informamos
+  if (!openBtn) {
+    console.warn('open-consultation button not found');
+    return;
+  }
+  if (!modal || !modalWrap) {
+    console.warn('Modal or modal wrapper not found - modal will not function properly.');
+    // still continue so hero iframe can load if available
+  }
 
-  // Accessibility / focus management variables
-  let lastFocused = null;
-
-  // Create or move iframe into target container
-  function ensureIframeIn(targetWrap) {
+  // Crea el iframe (si no existe) y devuelve el nodo
+  function createIframeNode() {
     let iframe = document.getElementById(IFRAME_ID);
+    if (iframe) return iframe;
 
-    if (!iframe) {
-      // Create new iframe
-      iframe = document.createElement('iframe');
-      iframe.id = IFRAME_ID;
-      iframe.src = IFRAME_SRC;
-      iframe.title = 'A2P Official Form';
-      iframe.loading = 'lazy';
-      iframe.frameBorder = '0';
-      iframe.style.width = '100%';
-      iframe.style.height = '640px';
-      iframe.style.border = '0';
-      iframe.style.display = 'block';
-      iframe.style.minHeight = '420px';
-      // Security & privacy: start with restrictive sandbox.
-      // If the third-party needs extra permissions, add them intentionally.
-      iframe.sandbox = 'allow-forms allow-scripts allow-popups';
-      iframe.referrerPolicy = 'no-referrer';
-      iframe.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
-    }
+    iframe = document.createElement('iframe');
+    iframe.id = IFRAME_ID;
+    iframe.src = IFRAME_SRC;
+    iframe.title = 'A2P Official Form';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('frameborder', '0');
+    iframe.style.width = '100%';
+    iframe.style.height = '640px';
+    iframe.style.border = '0';
+    iframe.style.display = 'block';
+    iframe.style.minHeight = '420px';
+    // Seguridad: sandbox restrictivo. Añade allow-same-origin solo si el proveedor lo requiere.
+    iframe.sandbox = 'allow-forms allow-scripts allow-popups';
+    iframe.referrerPolicy = 'no-referrer';
+    iframe.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
 
-    // Move the iframe into the modal wrapper (appendChild will move it if already present)
-    // Replace placeholder if present
-    const placeholder = targetWrap.querySelector('#modal-form-placeholder');
+    return iframe;
+  }
+
+  // Inserta el iframe dentro de un wrapper; reemplaza placeholder si existe
+  function insertIframeInto(wrapper) {
+    const iframe = createIframeNode();
+    if (!wrapper) return;
+    const placeholder = wrapper.querySelector('#modal-form-placeholder') || wrapper.querySelector('#form-iframe-placeholder');
     if (placeholder) {
       placeholder.parentNode.replaceChild(iframe, placeholder);
     } else {
-      // clear existing children and append iframe
-      targetWrap.innerHTML = '';
-      targetWrap.appendChild(iframe);
+      // Si ya había contenido (p.e. modal), vaciar y append
+      wrapper.innerHTML = '';
+      wrapper.appendChild(iframe);
     }
+    // ajustar altura responsiva
+    adjustIframeHeight(iframe);
+  }
 
-    // Adjust height responsive
-    function adjustHeight() {
+  function adjustIframeHeight(iframe) {
+    if (!iframe) return;
+    function doAdjust() {
       const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
       const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
       if (vw < 640) {
@@ -194,110 +206,102 @@
         iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
       }
     }
-    window.addEventListener('resize', adjustHeight, { passive: true });
-    window.addEventListener('orientationchange', adjustHeight, { passive: true });
-    setTimeout(adjustHeight, 300);
+    window.addEventListener('resize', doAdjust, { passive: true });
+    window.addEventListener('orientationchange', doAdjust, { passive: true });
+    setTimeout(doAdjust, 200);
   }
 
-  // Open modal
+  // Al cargar el DOM, intentamos insertar el iframe en el hero (si existe)
+  if (heroWrap) {
+    insertIframeInto(heroWrap);
+  }
+
+  // Focus trap / accesibilidad
+  let lastFocused = null;
+  function trapFocusOn(modalEl) {
+    function handleKeydown(e) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+      if (e.key === 'Tab') {
+        const focusable = modalEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const nodes = Array.prototype.slice.call(focusable).filter(function(el) {
+          return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+        });
+        if (nodes.length === 0) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        } else if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeydown);
+    return function removeTrap() { document.removeEventListener('keydown', handleKeydown); };
+  }
+
+  let removeTrapFn = null;
+
+  // Abrir modal: mueve el iframe del hero al modal
   function openModal() {
+    if (!modal) return;
     lastFocused = document.activeElement;
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.documentElement.style.overflow = 'hidden'; // prevent page scroll behind modal
-
-    // Insert iframe into modal
-    ensureIframeIn(modalWrap);
-
-    // Focus first focusable in modal
+    modal.classList.remove('hidden'); modal.classList.add('flex');
+    document.documentElement.style.overflow = 'hidden';
+    // Move iframe from hero to modal (if hero had it). If not present, create in modal.
+    const iframe = document.getElementById(IFRAME_ID);
+    if (iframe && modalWrap) {
+      modalWrap.innerHTML = '';
+      modalWrap.appendChild(iframe);
+      adjustIframeHeight(iframe);
+    } else if (modalWrap) {
+      insertIframeInto(modalWrap);
+    }
+    // focus first
     const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     if (focusable) focusable.focus();
-
-    // Trap tab focus
-    document.addEventListener('keydown', handleKeydown);
+    removeTrapFn = trapFocusOn(modal);
   }
 
-  // Close modal
+  // Cerrar modal: mover iframe de vuelta al hero
   function closeModal() {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.documentElement.style.overflow = ''; // restore scroll
-    document.removeEventListener('keydown', handleKeydown);
+    if (!modal) return;
+    modal.classList.add('hidden'); modal.classList.remove('flex');
+    document.documentElement.style.overflow = '';
+    // Move iframe back to hero if hero exists
+    const iframe = document.getElementById(IFRAME_ID);
+    if (iframe && heroWrap) {
+      heroWrap.innerHTML = '';
+      heroWrap.appendChild(iframe);
+      adjustIframeHeight(iframe);
+    }
+    if (removeTrapFn) { removeTrapFn(); removeTrapFn = null; }
     if (lastFocused) lastFocused.focus();
   }
 
-  // Key handling (Esc + basic Tab trap)
-  function handleKeydown(e) {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      closeModal();
-      return;
+  // Listeners
+  openBtn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+
+  if (closeBtn) closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
+  if (closeBtnBottom) closeBtnBottom.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
+  if (overlay) overlay.addEventListener('click', function(){ closeModal(); });
+
+  // Pre-warm: opcionalmente prefetch the iframe src via fetch beacon (non-blocking) to speed initial load (best-effort)
+  try {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => { /* no-op pre-warm could go here */ }, { timeout: 1000 });
     }
-    // Basic tab trap
-    if (e.key === 'Tab') {
-      const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-      const nodes = Array.prototype.slice.call(focusables).filter(function(el) {
-        return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
-      });
-      if (nodes.length === 0) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      } else if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      }
-    }
-  }
+  } catch (e) {}
 
-  // Event listeners
-  openBtn.addEventListener('click', function(e){
-    e.preventDefault();
-    openModal();
-  });
-
-  closeBtn && closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
-  closeBtnBottom && closeBtnBottom.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
-
-  overlay && overlay.addEventListener('click', function(){ closeModal(); });
-
-  // Optional: lazy load iframe when user scrolls near the modal trigger (pre-warm)
-  if ('IntersectionObserver' in window) {
-    try {
-      const preWarmObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Pre-create iframe but do not append it until modal opens (create detached)
-            if (!document.getElementById(IFRAME_ID)) {
-              const pre = document.createElement('iframe');
-              pre.id = IFRAME_ID;
-              pre.src = IFRAME_SRC;
-              pre.loading = 'lazy';
-              pre.frameBorder = '0';
-              pre.style.width = '100%';
-              pre.style.height = '640px';
-              pre.style.border = '0';
-              pre.style.display = 'block';
-              pre.style.minHeight = '420px';
-              pre.sandbox = 'allow-forms allow-scripts allow-popups';
-              pre.referrerPolicy = 'no-referrer';
-              pre.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
-              // Keep it detached; will be moved into modal on open by ensureIframeIn
-            }
-            obs.disconnect();
-          }
-        });
-      }, {rootMargin: '600px'});
-      preWarmObserver.observe(openBtn);
-    } catch (e) {
-      // noop
-    }
-  }
-
-})();
+}); // DOMContentLoaded
 </script>
+
 
 <!-- /FIN HERO CTA REEMPLAZADO -->
 
