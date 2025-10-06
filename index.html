@@ -30,24 +30,35 @@
 </head>
 <body class="text-gray-800 antialiased">
 
+ 
+
+
   <!-- NAV -->
-  <nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="assets/logo2.png" alt="Tax Defense Group USA" class="h-8 w-8"/>
-          <span class="font-bold text-xl">Tax Defense Group USA</span>
-        </a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="services.html" class="hover:text-blue-600">Services</a>
-          <a href="faq.html" class="hover:text-blue-600">FAQ</a>
-          <a href="reviews.html" class="hover:text-blue-600">Reviews</a>
-          <a href="careers.html" class="hover:text-blue-600">Careers</a>
-          <a href="contact.html" class="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">Free Consultation</a>
-        </div>
+<nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo2.png" alt="Tax Defense Group USA" class="h-8 w-8"/>
+        <span class="font-bold text-xl">Tax Defense Group USA</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="services.html" class="hover:text-blue-600">Services</a>
+        <a href="faq.html" class="hover:text-blue-600">FAQ</a>
+        <a href="reviews.html" class="hover:text-blue-600">Reviews</a>
+        <a href="careers.html" class="hover:text-blue-600">Careers</a>
+        <!-- NEW: Contact menu item that navigates to contact.html -->
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+
+        <!-- This button now opens the modal instead of navigating -->
+        <button id="open-consultation" class="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition">
+          Free Consultation
+        </button>
       </div>
+      <!-- Mobile / small-screen: keep same behaviour (optional: add modal trigger in mobile nav) -->
     </div>
-  </nav>
+  </div>
+</nav>
+
 
  
 
@@ -116,54 +127,178 @@
 
   <!-- Lazy-load iframe script (keeps host page safe from embed script injection) -->
   <script>
-    (function () {
-      const wrap = document.getElementById('form-iframe-wrap');
-      if (!wrap) return;
+(function() {
+  // --- Config ---
+  const IFRAME_ID = 'inline-yFTBzCkkuC6LJv0fjeFm';
+  const IFRAME_SRC = 'https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm';
 
-      function insertIframe() {
-        if (document.getElementById('inline-yFTBzCkkuC6LJv0fjeFm')) return;
+  // Elements
+  const openBtn = document.getElementById('open-consultation');
+  const modal = document.getElementById('consultation-modal');
+  const overlay = document.getElementById('consultation-overlay');
+  const closeBtn = document.getElementById('close-consultation');
+  const closeBtnBottom = document.getElementById('close-consultation-bottom');
+  const modalWrap = document.getElementById('modal-form-wrap');
+  const modalPlaceholder = document.getElementById('modal-form-placeholder');
 
-        const iframe = document.createElement('iframe');
-        iframe.id = 'inline-yFTBzCkkuC6LJv0fjeFm';
-        iframe.src = 'https://api.leadconnectorhq.com/widget/form/yFTBzCkkuC6LJv0fjeFm';
-        iframe.title = 'A2P Official Form';
-        iframe.loading = 'lazy';
-        iframe.frameBorder = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '640px';
-        iframe.style.border = 'none';
-        iframe.style.display = 'block';
-        iframe.style.minHeight = '420px';
+  if (!openBtn || !modal || !modalWrap) return;
 
-        wrap.innerHTML = '';
-        wrap.appendChild(iframe);
+  // Accessibility / focus management variables
+  let lastFocused = null;
 
-        function adjustHeight() {
-          const vw = window.innerWidth || document.documentElement.clientWidth;
-          const vh = window.innerHeight || document.documentElement.clientHeight;
-          if (vw < 640) {
-            iframe.style.height = Math.max(420, Math.round(vh * 0.58)) + 'px';
-          } else if (vw < 1024) {
-            iframe.style.height = Math.max(560, Math.round(vh * 0.68)) + 'px';
-          } else {
-            const calc = Math.round(vh * 0.78);
-            iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
-          }
-        }
+  // Create or move iframe into target container
+  function ensureIframeIn(targetWrap) {
+    let iframe = document.getElementById(IFRAME_ID);
 
-        window.addEventListener('resize', adjustHeight, { passive: true });
-        window.addEventListener('orientationchange', adjustHeight, { passive: true });
-        setTimeout(adjustHeight, 600);
-      }
+    if (!iframe) {
+      // Create new iframe
+      iframe = document.createElement('iframe');
+      iframe.id = IFRAME_ID;
+      iframe.src = IFRAME_SRC;
+      iframe.title = 'A2P Official Form';
+      iframe.loading = 'lazy';
+      iframe.frameBorder = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '640px';
+      iframe.style.border = '0';
+      iframe.style.display = 'block';
+      iframe.style.minHeight = '420px';
+      // Security & privacy: start with restrictive sandbox.
+      // If the third-party needs extra permissions, add them intentionally.
+      iframe.sandbox = 'allow-forms allow-scripts allow-popups';
+      iframe.referrerPolicy = 'no-referrer';
+      iframe.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
+    }
 
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(insertIframe, { timeout: 1000 });
+    // Move the iframe into the modal wrapper (appendChild will move it if already present)
+    // Replace placeholder if present
+    const placeholder = targetWrap.querySelector('#modal-form-placeholder');
+    if (placeholder) {
+      placeholder.parentNode.replaceChild(iframe, placeholder);
+    } else {
+      // clear existing children and append iframe
+      targetWrap.innerHTML = '';
+      targetWrap.appendChild(iframe);
+    }
+
+    // Adjust height responsive
+    function adjustHeight() {
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+      if (vw < 640) {
+        iframe.style.height = Math.max(420, Math.round(vh * 0.58)) + 'px';
+      } else if (vw < 1024) {
+        iframe.style.height = Math.max(560, Math.round(vh * 0.68)) + 'px';
       } else {
-        window.addEventListener('load', () => setTimeout(insertIframe, 300));
+        const calc = Math.round(vh * 0.78);
+        iframe.style.height = Math.min(Math.max(720, calc), 1000) + 'px';
       }
-    })();
-  </script>
-</section>
+    }
+    window.addEventListener('resize', adjustHeight, { passive: true });
+    window.addEventListener('orientationchange', adjustHeight, { passive: true });
+    setTimeout(adjustHeight, 300);
+  }
+
+  // Open modal
+  function openModal() {
+    lastFocused = document.activeElement;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.documentElement.style.overflow = 'hidden'; // prevent page scroll behind modal
+
+    // Insert iframe into modal
+    ensureIframeIn(modalWrap);
+
+    // Focus first focusable in modal
+    const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable) focusable.focus();
+
+    // Trap tab focus
+    document.addEventListener('keydown', handleKeydown);
+  }
+
+  // Close modal
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.documentElement.style.overflow = ''; // restore scroll
+    document.removeEventListener('keydown', handleKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // Key handling (Esc + basic Tab trap)
+  function handleKeydown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+      return;
+    }
+    // Basic tab trap
+    if (e.key === 'Tab') {
+      const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const nodes = Array.prototype.slice.call(focusables).filter(function(el) {
+        return el.offsetWidth || el.offsetHeight || el.getClientRects().length;
+      });
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    }
+  }
+
+  // Event listeners
+  openBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    openModal();
+  });
+
+  closeBtn && closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
+  closeBtnBottom && closeBtnBottom.addEventListener('click', function(e){ e.preventDefault(); closeModal(); });
+
+  overlay && overlay.addEventListener('click', function(){ closeModal(); });
+
+  // Optional: lazy load iframe when user scrolls near the modal trigger (pre-warm)
+  if ('IntersectionObserver' in window) {
+    try {
+      const preWarmObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Pre-create iframe but do not append it until modal opens (create detached)
+            if (!document.getElementById(IFRAME_ID)) {
+              const pre = document.createElement('iframe');
+              pre.id = IFRAME_ID;
+              pre.src = IFRAME_SRC;
+              pre.loading = 'lazy';
+              pre.frameBorder = '0';
+              pre.style.width = '100%';
+              pre.style.height = '640px';
+              pre.style.border = '0';
+              pre.style.display = 'block';
+              pre.style.minHeight = '420px';
+              pre.sandbox = 'allow-forms allow-scripts allow-popups';
+              pre.referrerPolicy = 'no-referrer';
+              pre.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
+              // Keep it detached; will be moved into modal on open by ensureIframeIn
+            }
+            obs.disconnect();
+          }
+        });
+      }, {rootMargin: '600px'});
+      preWarmObserver.observe(openBtn);
+    } catch (e) {
+      // noop
+    }
+  }
+
+})();
+</script>
+
 <!-- /FIN HERO CTA REEMPLAZADO -->
 
 
@@ -427,5 +562,41 @@
   </script>
 
   <script src="main.js" defer></script>
+
+
+
+
+  <!-- CONSULTATION MODAL (hidden by default) -->
+<div id="consultation-modal" class="fixed inset-0 z-60 hidden items-center justify-center px-4 py-8">
+  <!-- overlay -->
+  <div id="consultation-overlay" class="absolute inset-0 bg-black/50 backdrop-blur-sm" tabindex="-1" aria-hidden="true"></div>
+
+  <!-- dialog -->
+  <div class="relative z-70 w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden" role="dialog" aria-modal="true" aria-labelledby="consultation-title">
+    <div class="flex items-start justify-between p-4 md:p-6 border-b">
+      <div>
+        <h2 id="consultation-title" class="text-lg font-semibold">Request a Free Consultation</h2>
+        <p class="text-sm text-gray-600">Complete the form and our team will contact you.</p>
+      </div>
+      <button id="close-consultation" aria-label="Close consultation form" class="ml-4 inline-flex items-center justify-center h-9 w-9 rounded-md text-gray-600 hover:bg-gray-100">
+        ✕
+      </button>
+    </div>
+
+    <!-- Iframe wrapper: placeholder -> iframe inserted when modal opens -->
+    <div id="modal-form-wrap" class="w-full" style="min-height:420px;max-height:1000px;overflow:hidden;">
+      <div id="modal-form-placeholder" class="w-full h-full flex items-center justify-center p-6" role="status" aria-live="polite">
+        <div class="text-center text-sm text-gray-500">Cargando formulario…</div>
+      </div>
+    </div>
+
+    <div class="p-4 md:p-6 border-t text-right">
+      <button id="close-consultation-bottom" class="px-4 py-2 rounded-lg border hover:bg-gray-50">Close</button>
+    </div>
+  </div>
+</div>
+
+
+  
 </body>
 </html>
