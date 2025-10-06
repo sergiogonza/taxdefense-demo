@@ -325,33 +325,70 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- /FIN HERO CTA REEMPLAZADO -->
 
+ 
+
+
+
   <!-- SERVICES -->
-  <section class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div class="p-4 rounded-xl border">
-          <div class="text-2xl font-bold">Tax Relief</div>
-          <div class="text-sm text-gray-500">Payment plans, OIC, CNC &amp; penalty abatement</div>
-        </div>
+<section class="py-12 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="p-4 rounded-xl border">
+        <div class="text-2xl font-bold">Tax Relief</div>
+        <div class="text-sm text-gray-500">Payment plans, OIC, CNC &amp; penalty abatement</div>
+      </div>
 
-        <div class="p-4 rounded-xl border">
-          <div class="text-2xl font-bold">Tax Resolution</div>
-          <div class="text-sm text-gray-500">Audits, spouse relief, payroll tax, liens &amp; levies</div>
-        </div>
+      <div class="p-4 rounded-xl border">
+        <div class="text-2xl font-bold">Tax Resolution</div>
+        <div class="text-sm text-gray-500">Audits, spouse relief, payroll tax, liens &amp; levies</div>
+      </div>
 
-        <div class="p-4 rounded-xl border">
-          <div class="text-2xl font-bold">Tax Preparation</div>
-          <div class="text-sm text-gray-500">Accurate filing, planning &amp; compliance</div>
-        </div>
+      <div class="p-4 rounded-xl border">
+        <div class="text-2xl font-bold">Tax Preparation</div>
+        <div class="text-sm text-gray-500">Accurate filing, planning &amp; compliance</div>
+      </div>
 
-        <div class="p-4 rounded-xl border">
-          <div class="text-2xl font-bold">Bookkeeping</div>
-          <div class="text-sm text-gray-500">Records, audit readiness &amp; financial strategy</div>
-        </div>
+      <div class="p-4 rounded-xl border">
+        <div class="text-2xl font-bold">Bookkeeping</div>
+        <div class="text-sm text-gray-500">Records, audit readiness &amp; financial strategy</div>
       </div>
     </div>
-  </section>
+
+    <!-- GET HELP NOW button -->
+    <div class="mt-10 flex justify-center">
+      <button
+        id="open-help-now"
+        type="button"
+        class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        GET HELP NOW
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Conectamos el nuevo botón con el mismo modal existente
+  document.addEventListener('DOMContentLoaded', function () {
+    const helpBtn = document.getElementById('open-help-now');
+    const openConsultationBtn = document.getElementById('open-consultation');
+    if (helpBtn && openConsultationBtn) {
+      helpBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openConsultationBtn.click(); // reutiliza el mismo trigger
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+
+  
 
   <!-- 3 EASY STEPS (background image + blue filter overlay) -->
   <section class="relative py-20">
