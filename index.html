@@ -28,9 +28,11 @@
       .filter-brightness:hover { transform: translateY(-4px) scale(1.01); }
     }
 
-    /* Modal helper (visible when .flex applied) */
-    .hidden { display: none !important; }
-    .flex { display: flex !important; }
+    /* Nota: no sobreescribimos .hidden/.flex para no romper utilidades de Tailwind.
+       Si quieres clases dedicadas para el modal, usamos .modal-hidden / .modal-visible. */
+
+    .modal-hidden { display: none; }
+    .modal-visible { display: flex; }
   </style>
 </head>
 <body class="text-gray-800 antialiased">
@@ -270,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function openModal() {
     if (!modal) return;
     lastFocused = document.activeElement;
+    // usamos utilidades de Tailwind: hidden / flex (NO sobrescritas)
     modal.classList.remove('hidden'); modal.classList.add('flex');
     document.documentElement.style.overflow = 'hidden';
     // Move iframe from hero to modal (if hero had it). If not present, create in modal.
@@ -346,39 +349,6 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="text-2xl font-bold">Bookkeeping</div>
           <div class="text-sm text-gray-500">Records, audit readiness &amp; financial strategy</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE SERVICES -->
-  <section class="py-12 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold mb-6">Core Services</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="services.html#tax-relief" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Tax Relief</h3>
-          <p class="text-sm text-gray-600">Payment plans, penalty relief, and other options to reduce or restructure what you owe.</p>
-        </a>
-        <a href="services.html#tax-resolution" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Tax Resolution</h3>
-          <p class="text-sm text-gray-600">Audit representation, liens and levies, wage garnishments, and enforcement defense.</p>
-        </a>
-        <a href="services.html#offer-in-compromise" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Offer in Compromise</h3>
-          <p class="text-sm text-gray-600">Qualify to settle your balance for less based on financial hardship.</p>
-        </a>
-        <a href="services.html#installment-agreements" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Installment Agreements</h3>
-          <p class="text-sm text-gray-600">Affordable monthly plans that fit your budget and stop collection pressure.</p>
-        </a>
-        <a href="services.html#currently-not-collectible" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Currently Not Collectible (CNC)</h3>
-          <p class="text-sm text-gray-600">Pause collections when you can’t afford to pay right now.</p>
-        </a>
-        <a href="services.html#tax-preparation" class="block rounded-2xl bg-white p-6 shadow hover:shadow-md transition">
-          <h3 class="font-semibold mb-2">Tax Preparation</h3>
-          <p class="text-sm text-gray-600">Individual & business returns, amended filings, and catch-up year(s).</p>
-        </a>
       </div>
     </div>
   </section>
