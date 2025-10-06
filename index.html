@@ -7,7 +7,8 @@
   <meta name="description" content="Resolve IRS and state tax issues with licensed professionals: offers in compromise, installment plans, audit representation, and more."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="assets/favicon.ico"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/1.0.1/css/themify-icons.css">
+  <!-- Themify Icons: cambiado a jsDelivr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/themify-icons@1.0.1/css/themify-icons.css" crossorigin="anonymous">
 
   <style>
     /* Consolidated filters used across the page */
@@ -26,12 +27,13 @@
     @media (min-width: 768px) {
       .filter-brightness:hover { transform: translateY(-4px) scale(1.01); }
     }
+
+    /* Modal helper (visible when .flex applied) */
+    .hidden { display: none !important; }
+    .flex { display: flex !important; }
   </style>
 </head>
 <body class="text-gray-800 antialiased">
-
- 
-
 
   <!-- NAV -->
 <nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b">
@@ -58,12 +60,6 @@
     </div>
   </div>
 </nav>
-
-
- 
-
-
-
 
   <!-- HERO CTA (REEMPLAZAR ESTE BLOQUE COMPLETO) -->
 <section class="relative overflow-hidden">
@@ -117,7 +113,7 @@
 
         <!-- iframe wrapper: placeholder -> iframe inserted lazy to avoid external script breaking layout -->
         <div id="form-iframe-wrap" class="w-full" style="min-height:420px;max-height:1000px;overflow:hidden;">
-          <div id="form-iframe-placeholder" class="w-full h-full flex items-center justify-center p-6">
+          <div id="form-iframe-placeholder" class="w-full h-full flex items-center justify-center p-6" role="status" aria-live="polite">
             <div class="text-center text-sm text-gray-500">Cargando formulario…</div>
           </div>
         </div>
@@ -125,7 +121,7 @@
     </div> <!-- /.grid -->
   </div> <!-- /.container -->
 
-  <!-- Lazy-load iframe script (keeps host page safe from embed script injection) -->
+  <!-- Lazy-load iframe + modal control script -->
   <script>
 document.addEventListener('DOMContentLoaded', function () {
   // --- Config ---
@@ -142,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const heroWrap = document.getElementById('form-iframe-wrap');
   const heroPlaceholder = document.getElementById('form-iframe-placeholder');
 
-  // Validaciones mínimas: si falta heroWrap aún así el modal podrá abrir, pero informamos
+  // Validaciones mínimas
   if (!openBtn) {
     console.warn('open-consultation button not found');
     return;
@@ -168,10 +164,32 @@ document.addEventListener('DOMContentLoaded', function () {
     iframe.style.border = '0';
     iframe.style.display = 'block';
     iframe.style.minHeight = '420px';
-    // Seguridad: sandbox restrictivo. Añade allow-same-origin solo si el proveedor lo requiere.
-    iframe.sandbox = 'allow-forms allow-scripts allow-popups';
+
+    // Seguridad: permitimos same-origin porque el widget necesita acceso a cookies.
+    // ADVERTENCIA: solo usar esto si confías en el proveedor del widget (leadconnectorhq).
+    iframe.sandbox = 'allow-forms allow-scripts allow-popups allow-same-origin';
+
     iframe.referrerPolicy = 'no-referrer';
     iframe.setAttribute('aria-label', 'Formulario de contacto - Tax Defense Group USA');
+
+    // Evento load para detectar carga correcta y quitar fallback
+    let iframeLoaded = false;
+    iframe.addEventListener('load', function() {
+      iframeLoaded = true;
+      // Si hay un loader, aquí lo podrías ocultar
+      console.log('Widget iframe loaded successfully.');
+    });
+
+    // Fallback: si no carga en 12s, mostrar mensaje de error
+    setTimeout(function() {
+      if (!iframeLoaded) {
+        const container = document.getElementById('modal-form-wrap') || document.getElementById('form-iframe-wrap');
+        if (container) {
+          container.innerHTML = '<div class="p-6 text-center text-sm text-red-600">El formulario no pudo cargarse. Por favor visita <a href="contact.html" class="underline">la página de contacto</a> o llama al +1 888-763-8540.</div>';
+        }
+        console.error('Iframe no cargó dentro del tiempo esperado (12s)');
+      }
+    }, 12000);
 
     return iframe;
   }
@@ -302,16 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }); // DOMContentLoaded
 </script>
 
-
 <!-- /FIN HERO CTA REEMPLAZADO -->
-
-
-
-
-  
-
-
-        
 
   <!-- SERVICES -->
   <section class="py-12 bg-white">
@@ -396,14 +405,14 @@ document.addEventListener('DOMContentLoaded', function () {
       <!-- Step 1 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center flex flex-col items-center">
         <div class="relative mb-4">
-          <i class="ti-mobile text-blue-600 text-4xl"></i>
+          <i class="ti-mobile text-blue-600 text-4xl" aria-hidden="true"></i>
           <div class="absolute inset-0 bg-blue-100 rounded-full -z-10"></div>
         </div>
         <h3 class="text-xl font-bold mb-2">Step 1</h3>
         <p class="text-lg font-semibold mb-3">Call now for a free consultation</p>
         <p class="text-gray-700 mb-4">Call us—there’s no obligation.</p>
         <p class="text-gray-700 mb-4">We will see if your situation qualifies in 60 seconds.</p>
-        <a href="tel:888-373-9385" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+        <a href="tel:+18887638540" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
           +1 888-763-8540
         </a>
       </div>
@@ -411,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <!-- Step 2 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center flex flex-col items-center">
         <div class="relative mb-4">
-          <i class="ti-ruler-alt-2 text-blue-600 text-4xl"></i>
+          <i class="ti-ruler-alt-2 text-blue-600 text-4xl" aria-hidden="true"></i>
           <div class="absolute inset-0 bg-blue-100 rounded-full -z-10"></div>
         </div>
         <h3 class="text-xl font-bold mb-2">Step 2</h3>
@@ -422,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <!-- Step 3 -->
       <div class="bg-white rounded-2xl shadow-lg p-6 text-center flex flex-col items-center">
         <div class="relative mb-4">
-          <i class="ti-cup text-blue-600 text-4xl"></i>
+          <i class="ti-cup text-blue-600 text-4xl" aria-hidden="true"></i>
           <div class="absolute inset-0 bg-blue-100 rounded-full -z-10"></div>
         </div>
         <h3 class="text-xl font-bold mb-2">Step 3</h3>
@@ -567,9 +576,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   <script src="main.js" defer></script>
 
-
-
-
   <!-- CONSULTATION MODAL (hidden by default) -->
 <div id="consultation-modal" class="fixed inset-0 z-60 hidden items-center justify-center px-4 py-8">
   <!-- overlay -->
@@ -600,7 +606,5 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </div>
 
-
-  
 </body>
 </html>
