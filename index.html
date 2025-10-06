@@ -330,33 +330,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   <!-- SERVICES -->
-<section class="py-12 bg-white">
+<!-- SERVICES -->
+<section class="py-12 bg-white" id="services-overview">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div class="p-4 rounded-xl border">
+      <a href="services.html#tax-relief"
+         class="p-4 rounded-xl border hover:shadow-md transition service-link"
+         aria-label="Ir a Tax Relief">
         <div class="text-2xl font-bold">Tax Relief</div>
         <div class="text-sm text-gray-500">Payment plans, OIC, CNC &amp; penalty abatement</div>
-      </div>
+      </a>
 
-      <div class="p-4 rounded-xl border">
+      <a href="services.html#tax-resolution"
+         class="p-4 rounded-xl border hover:shadow-md transition service-link"
+         aria-label="Ir a Tax Resolution">
         <div class="text-2xl font-bold">Tax Resolution</div>
         <div class="text-sm text-gray-500">Audits, spouse relief, payroll tax, liens &amp; levies</div>
-      </div>
+      </a>
 
-      <div class="p-4 rounded-xl border">
+      <a href="services.html#tax-preparation"
+         class="p-4 rounded-xl border hover:shadow-md transition service-link"
+         aria-label="Ir a Tax Preparation">
         <div class="text-2xl font-bold">Tax Preparation</div>
         <div class="text-sm text-gray-500">Accurate filing, planning &amp; compliance</div>
-      </div>
+      </a>
 
-      <div class="p-4 rounded-xl border">
+      <a href="services.html#bookkeeping"
+         class="p-4 rounded-xl border hover:shadow-md transition service-link"
+         aria-label="Ir a Bookkeeping">
         <div class="text-2xl font-bold">Bookkeeping</div>
         <div class="text-sm text-gray-500">Records, audit readiness &amp; financial strategy</div>
-      </div>
+      </a>
     </div>
 
-    <!-- GET HELP NOW button -->
-    <div class="mt-10 flex justify-center">
+    <!-- Call-to-action text and button (mantengo lo que acordamos antes) -->
+    <div class="mt-12 text-center max-w-3xl mx-auto">
+      <p class="text-gray-700 text-lg mb-6">
+        Don’t wait for the IRS to take action — take control of your financial future today.
+        <span class="font-semibold">Tax Defense Group USA</span> is ready to help you resolve your tax issues,
+        protect your assets, and start fresh. Call
+        <a href="tel:2019879231" class="text-blue-600 font-semibold hover:underline">(201) 987-9231</a>
+        now or complete the form below.
+      </p>
+
       <button
         id="open-help-now"
         type="button"
@@ -367,6 +385,69 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </section>
+
+<!-- Script: smooth scroll si ya estás en services.html -->
+<script>
+  (function () {
+    // Sólo corre cuando el DOM está listo
+    document.addEventListener('DOMContentLoaded', function () {
+      // Smooth scroll handler para enlaces .service-link que apuntan a anchors
+      function isSamePageTarget(href) {
+        try {
+          const url = new URL(href, location.href);
+          // Consideramos "misma página" cuando el pathname coincide con location.pathname
+          return url.pathname === location.pathname && url.hash;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      document.querySelectorAll('a.service-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          const href = link.getAttribute('href');
+          // Si el link apunta a services.html#... y estamos en services.html, realizamos scroll suave
+          // También cubrimos el caso relativo (href="#...") si lo llegas a usar
+          const targetHash = (new URL(href, location.href)).hash || '';
+          const linkPathname = (new URL(href, location.href)).pathname;
+
+          // Normalizar pathname: si la ruta del link es '/services.html' y estamos en '/services.html' -> same
+          const samePage = (linkPathname === location.pathname || (linkPathname.endsWith('/services.html') && location.pathname.endsWith('services.html')));
+
+          if (samePage && targetHash) {
+            // evitar navegación por defecto y hacer scroll suave
+            e.preventDefault();
+            const targetId = targetHash.replace('#', '');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              // opcional: actualizar el hash en la URL sin recargar
+              history.replaceState(null, '', linkPathname + targetHash);
+            } else {
+              // Si no existe el ancla en esta página, caemos al comportamiento por defecto (navegar)
+              // permitimos la navegación
+              window.location.href = href;
+            }
+          }
+          // si no es la misma página (ej: estamos en index), el link hace la navegación normal a services.html#...
+        });
+      });
+
+      // Conectar botón GET HELP NOW con el modal existente
+      const helpBtn = document.getElementById('open-help-now');
+      const openConsultationBtn = document.getElementById('open-consultation');
+      if (helpBtn && openConsultationBtn) {
+        helpBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openConsultationBtn.click();
+        });
+      }
+    });
+  })();
+</script>
+
+
+
+  
 
 <script>
   // Conectamos el nuevo botón con el mismo modal existente
