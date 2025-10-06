@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Tax Defense Group USA — Tax Relief & Resolution</title>
-  <meta name="description" content="Resolve IRS and state tax issues with licensed professionals: offers in compromise, installment plans, audit representation, and more."/>
-  <!-- Tailwind CSS CDN -->
+  <title>Tax Defense Group USA — Services</title>
+  <meta name="description" content="Explore Tax Defense Group USA services: tax relief, resolution, preparation, bookkeeping, and more."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="assets/favicon.ico"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/themify-icons@1.0.1/css/themify-icons.css">
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
 <body class="text-gray-800 antialiased">
 
-<!-- Navbar -->
+<!-- 🌐 NAVBAR -->
 <nav class="bg-white/80 backdrop-blur sticky top-0 z-50 border-b">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
@@ -20,29 +23,18 @@
         <span class="font-bold text-xl">Tax Defense Group USA</span>
       </a>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-6 relative">
-        <div class="relative group">
-          <button class="flex items-center gap-1 hover:text-blue-600 focus:outline-none">
-            Services <i class="ti-angle-down"></i>
-          </button>
-          <div class="absolute left-0 mt-2 w-56 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity">
-           
-            <a href="#tax-resolution" class="block px-4 py-2 hover:bg-blue-50">Tax Resolution</a>
-            <a href="#tax-preparation" class="block px-4 py-2 hover:bg-blue-50">Tax Preparation</a>
-            <a href="#tax-negotiation" class="block px-4 py-2 hover:bg-blue-50">Tax Negotiation</a>
-            <a href="#sba-loan-default" class="block px-4 py-2 hover:bg-blue-50">SBA Loan Default</a>
-            <a href="#bookkeeping-services" class="block px-4 py-2 hover:bg-blue-50">Bookkeeping Services</a>
-          </div>
-        </div>
-
-        <a href="faq.html" class="hover:text-blue-600">FAQ</a>
-        <a href="reviews.html" class="hover:text-blue-600">Reviews</a>
-        <a href="careers.html" class="hover:text-blue-600">Careers</a>
-        <a href="contact.html" class="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">Free Consultation</a>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="services.html" class="hover:text-blue-600 font-medium">Services</a>
+        <a href="faq.html" class="hover:text-blue-600 font-medium">FAQ</a>
+        <a href="reviews.html" class="hover:text-blue-600 font-medium">Reviews</a>
+        <a href="careers.html" class="hover:text-blue-600 font-medium">Careers</a>
+        <a href="contact.html" class="hover:text-blue-600 font-medium">Contact</a>
+        <a href="index.html#consultation" id="open-consultation"
+          class="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition font-medium">
+          Free Consultation
+        </a>
       </div>
 
-      <!-- Mobile menu button -->
       <div class="md:hidden flex items-center">
         <button id="mobile-menu-button" class="focus:outline-none">
           <span class="block w-6 h-0.5 bg-gray-800 mb-1"></span>
@@ -53,92 +45,109 @@
     </div>
   </div>
 
-  <!-- Mobile Menu -->
+  <!-- 📱 Mobile Menu -->
   <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
-   
-    <a href="#tax-resolution" class="block px-4 py-2 border-b">Tax Resolution</a>
-    <a href="#tax-preparation" class="block px-4 py-2 border-b">Tax Preparation</a>
-    <a href="#tax-negotiation" class="block px-4 py-2 border-b">Tax Negotiation</a>
-    <a href="#sba-loan-default" class="block px-4 py-2 border-b">SBA Loan Default</a>
-    <a href="#bookkeeping-services" class="block px-4 py-2 border-b">Bookkeeping Services</a>
+    <a href="services.html" class="block px-4 py-2 border-b">Services</a>
     <a href="faq.html" class="block px-4 py-2 border-b">FAQ</a>
     <a href="reviews.html" class="block px-4 py-2 border-b">Reviews</a>
     <a href="careers.html" class="block px-4 py-2 border-b">Careers</a>
-    <a href="contact.html" class="block px-4 py-2 text-blue-600 font-semibold">Free Consultation</a>
+    <a href="contact.html" class="block px-4 py-2 border-b">Contact</a>
+    <a href="index.html#consultation" class="block px-4 py-2 text-blue-600 font-semibold border-t">Free Consultation</a>
   </div>
 </nav>
 
-<!-- Hero Section -->
-
-
-<!-- Main Content -->
+<!-- 🧾 MAIN CONTENT -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
 
- 
-  <!-- Tax Resolution Banner -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow">
-    <h2 class="text-3xl font-semibold mb-4" id="tax-resolution">Tax Resolution</h2>
-    <p>If you have been placed in collections or are facing penalties by the IRS, we at The Tax Defense Group are here to help you find the perfect tax resolution for your tax problems. The Tax Defense Group can provide you with the proper guidance and advice to help you with your tax problems. Our team are experts in tax resolution and our mission is to fix your tax problems and get you back on track.</p>
-    <h3 class="text-2xl font-semibold mt-4">Options:</h3>
-    <ul class="list-disc list-inside space-y-2">
-      <li>Audit Representation</li>
-      <li>Innocent Spouse Relief</li>
-      <li>Payroll Tax Relief</li>
-      <li>Tax Liens</li>
-      <li>Tax Levies</li>
-    </ul>
-    <p class="mt-2">If you have any questions on how we can help you with your tax problems or the IRS collection process, please contact The Tax Defense Group today.</p>
+  <!-- Service 1 -->
+  <div id="tax-resolution-services">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Tax Resolution Services</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <h3 class="text-xl font-semibold mb-3">Taking Control of Your Tax Debt</h3>
+      <p>At Tax Defense Group USA, we help individuals and businesses resolve complex tax issues and permanently eliminate IRS and state tax problems. Our team of certified enrolled agents, experienced tax attorneys, and dedicated case managers protect your rights and negotiate directly with the IRS on your behalf.</p>
+      <p class="mt-4">Whether you’re facing back taxes, wage garnishments, or asset seizure threats, we design personalized resolution strategies to minimize your financial impact and restore your financial future.</p>
+    </div>
   </div>
 
-  <!-- Tax Preparation Banner -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow">
-    <h2 class="text-3xl font-semibold mb-4" id="tax-preparation">Tax Preparation</h2>
-    <p>The best way to prevent being audited or being put into the collections process in the first place. Prevention is the best way to avoid having a tax problem.</p>
-    <p>Hiring a tax professional ensures returns are filed accurately and mitigates risk of errors. Proper planning can prevent personal and estate tax issues for you and your heirs.</p>
-    <p>Filing your own taxes? <a href="#" class="text-blue-600 underline">Click Here</a></p>
+  <!-- Service 2 -->
+  <div id="irs-fresh-start">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">The IRS Fresh Start Initiative</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <h3 class="text-xl font-semibold mb-3">A Path to Real Financial Relief</h3>
+      <p>The IRS Fresh Start Initiative provides relief options designed to match different financial situations. We guide you through the qualification process, handle all documentation, and negotiate directly with the IRS to help you regain control of your finances.</p>
+    </div>
   </div>
 
-  <!-- Tax Negotiation Banner -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow">
-    <h2 class="text-3xl font-semibold mb-4" id="tax-negotiation">Tax Negotiation</h2>
-    <p>Our licensed professionals are here to help you resolve your tax problems. Depending on your circumstances and how much money you owe to the IRS, you may be entitled to a reduced amount of money owed or be able to make payments overtime...</p>
-    <h3 class="text-2xl font-semibold mt-4">Installment Payment Agreement</h3>
-    <p>If you can’t afford to pay your tax balance all at once, you may be able to make monthly payments to settle your tax obligations...</p>
-    <h3 class="text-2xl font-semibold mt-4">Partial Payment Settlement Agreement</h3>
-    <p>A partial payment settlement agreement that is a reduction of your original debt...</p>
-    <h3 class="text-2xl font-semibold mt-4">Offer in Compromise</h3>
-    <p>There are three types of categories: Doubt as to Liability, Doubt as to Collectibility, Effective Tax Administration...</p>
-    <h3 class="text-2xl font-semibold mt-4">Tax Penalty Abatement</h3>
-    <p>If you are now able to pay your tax balance in full, but you want to avoid penalties...</p>
-    <h3 class="text-2xl font-semibold mt-4">Financial Hardship</h3>
-    <p>If you are unable to pay the tax balance that you owe to the IRS, you may want to request CNC status...</p>
-    <h3 class="text-2xl font-semibold mt-4">Waiting Out the Statute of Limitations</h3>
-    <p>Depending on your circumstances, you may be able to wait out your tax obligations and have them removed from your record...</p>
+  <!-- Service 3 -->
+  <div id="comprehensive-tax-relief">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Comprehensive Tax Relief Solutions</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <p>We offer customized tax relief solutions including Offer in Compromise, Penalty Abatement, and Installment Agreements. Our experts will determine which program fits your financial circumstances best to reduce your tax burden effectively.</p>
+    </div>
   </div>
 
-  <!-- SBA Loan Default Banner -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow">
-    <h2 class="text-3xl font-semibold mb-4" id="sba-loan-default">SBA Loan Default</h2>
-    <p>For years the SBA has supported small businesses with loans. Some businesses face defaults due to ongoing economic challenges...</p>
-    <p>Your options include continuing payments, handling defaults through BFS, installment agreements, partial payments, and offers in compromise...</p>
+  <!-- Service 4 -->
+  <div id="levy-removal">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Levy Removal &amp; Stay of Protection</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <p>Our specialists can help stop IRS levies and wage garnishments fast. We communicate directly with the IRS to negotiate the release of levies and restore your financial stability.</p>
+    </div>
   </div>
 
-  <!-- Bookkeeping Services Banner -->
-  <div class="bg-gray-100 p-6 rounded-lg shadow">
-    <h2 class="text-3xl font-semibold mb-4" id="bookkeeping-services">Bookkeeping Services</h2>
-    <p>At The Tax Defense Group we provide comprehensive bookkeeping services for individuals and businesses facing tax challenges...</p>
-    <h3 class="text-2xl font-semibold mt-4">Why Bookkeeping is Vital</h3>
-    <ul class="list-disc list-inside space-y-2">
-      <li>Accurate Financial Records</li>
-      <li>Compliance and Audit Preparedness</li>
-      <li>Strategic Tax Planning</li>
-      <li>Peace of Mind</li>
-    </ul>
+  <!-- Service 5 -->
+  <div id="tax-preparation-compliance">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Tax Preparation &amp; Compliance</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <p>Ensure accurate and timely filing with our certified professionals. We handle complex cases, amendments, and strategic tax planning for individuals and businesses nationwide.</p>
+    </div>
+  </div>
+
+  <!-- Service 6 -->
+  <div id="audit-protection">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Audit Protection &amp; Representation</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <p>If you’ve received an IRS audit notice, our experienced team provides complete representation — managing communications, paperwork, and defense strategies so you never have to face the IRS alone.</p>
+    </div>
+  </div>
+
+  <!-- Service 7 -->
+  <div id="bookkeeping-business-support">
+    <div class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h2 class="text-3xl font-semibold">Bookkeeping &amp; Business Support</h2>
+    </div>
+    <div class="bg-white p-6 rounded-b-lg shadow">
+      <p>Our bookkeeping services ensure accuracy, audit readiness, and strategic insights that help your business thrive. From payroll to compliance, we have you covered.</p>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="text-center mt-16">
+    <p class="max-w-2xl mx-auto text-gray-700 mb-6 text-lg">
+      Don’t wait for the IRS to take action — take control of your financial future today.
+      Tax Defense Group USA is ready to help you resolve your tax issues, protect your assets, and start fresh.
+      Call <strong>(201) 987-9231</strong> now or complete the form below.
+    </p>
+    <a href="index.html#consultation"
+      class="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+      GET HELP NOW
+    </a>
   </div>
 
 </section>
 
-<!-- Footer -->
+<!-- 🌍 FOOTER -->
 <footer class="mt-16 border-t bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid md:grid-cols-3 gap-8">
     <div>
@@ -150,9 +159,9 @@
     </div>
     <div>
       <h3 class="font-semibold mb-2">Contact</h3>
-      <p class="text-sm"><strong>HQ:</strong> 30 Wall Street, 8th Floor New York, NY 10005</p>
-      <p class="text-sm"><strong>NJ:</strong> +18887638540</p>
-      <p class="text-sm"><strong>CA:</strong> +19172777123</p>
+      <p class="text-sm"><strong>HQ:</strong> 30 Wall Street, 8th Floor, New York, NY 10005</p>
+      <p class="text-sm"><strong>NJ:</strong> +1 888-763-8540</p>
+      <p class="text-sm"><strong>CA:</strong> +1 917-277-7123</p>
       <p class="text-sm"><a href="mailto:support@taxdefensegroupusa.com" class="underline">support@taxdefensegroupusa.com</a></p>
     </div>
     <div>
@@ -166,10 +175,12 @@
   <div class="text-center text-xs text-gray-500 pb-6">© 2025 Tax Defense Group USA. All rights reserved.</div>
 </footer>
 
+<!-- 📜 Scripts -->
 <script>
+  // Mobile menu toggle
   const mobileButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  mobileButton.addEventListener('click', () => {
+  mobileButton && mobileButton.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
   });
 </script>
